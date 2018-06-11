@@ -29,7 +29,7 @@ public class Client {
            if(str.equals("0")){exit = true;}
            
             InetAddress address = InetAddress.getLocalHost();
-            Socket socket = new Socket(address, 8004);        
+            Socket socket = new Socket(address, 8005);        
             ObjectInputStream  in = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(str);

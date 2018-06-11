@@ -22,17 +22,38 @@ public class Server {
         ObjectOutputStream out = null;
         boolean exit = false;
         try{
-            server = new ServerSocket(8004,100);
+            server = new ServerSocket(8005,100);
+            int flag = 0;
+            String user = null;
            
             while(!exit){
+                System.out.println("SERVER ACTIVE");
                 socket = server.accept();
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
                 
                 String inputStr = (String)in.readObject();
-                
+                                
                 if(!inputStr.equals("0")){
-                    out.writeObject("H3110 " + inputStr);
+                    if(flag==0){
+                        user = inputStr;
+                        out.writeObject("PASSWORD:");
+                        flag = 1;
+                    }
+                    if(flag==1){
+                        if(!inputStr.equals("init")){
+                            out.writeObject("PASSWORD INCORRECT");
+                        }
+                        else{
+                            out.writeObject("H3110 " + user);
+                            ++flag;                           
+                        }
+                        
+                    }
+                    else{
+                        out.writeObject("INPUT RECEIVED: " + inputStr);
+                    }
+                    
                 }
                 else{
                     
