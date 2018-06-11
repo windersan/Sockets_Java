@@ -47,11 +47,17 @@ public class Server {
                         else{
                             out.writeObject("H3110 " + user);
                             ++flag;                           
+                        }                      
+                    }
+                    if(flag==2){
+                        if(inputStr.equals("engine")){
+                            ++flag;
+                             out.writeObject("ENGINE INITIATED");
                         }
-                        
+                        else out.writeObject("INPUT RECEIVED: " + inputStr);
                     }
                     else{
-                        out.writeObject("INPUT RECEIVED: " + inputStr);
+                        out.writeObject("INPUT TO ENGINE RECEIVED: " + inputStr);
                     }
                     
                 }
